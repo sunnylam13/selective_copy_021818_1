@@ -95,10 +95,12 @@ def scanfolder(foldername_path):
 
 	dirs = os.listdir(foldername_path) # list all files
 
-def scanfile(filename):
+def scanfile(foldername_path, filename):
 	# this function scans a file to see if it matches the file type/ending specified by the user
+	# os.walk(user_folder_input)?
+	# os.walk(folder_path_to_be_analyzed)
 	
-	for foldername,subfolders,filenames in os.walk(user_folder_input):
+	for foldername,subfolders,filenames in os.walk(foldername_path):
 		for filename in filenames:
 			if file_type_regex1.search(filename):
 				try:
