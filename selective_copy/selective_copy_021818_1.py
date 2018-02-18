@@ -215,6 +215,9 @@ def analyzeAllFiles ():
 		# then scan all the files by cycling through folder_path_list until no more subfolders are added/left
 		scanFile(subfolder,file_type_regex1)
 
+	print(folder_path_list)
+	print(file_path_list)
+
 	# then go through the file list that meets criteria and copy
 	for match_file in file_path_list:
 		# match_file - already a string file path if done right, aka file source
