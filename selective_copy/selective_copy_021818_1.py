@@ -43,7 +43,10 @@ print(file_type_regex1) # for testing
 # os.walk() handles all the behind the scenes looping, including into the subfolders (without having to write a separate loop)
 
 for foldername,subfolders,filenames in os.walk(user_folder_input):
-	pass
+	for filename in filenames:
+		if file_type_regex1.search(filename):
+			print("Found a file with the %s ending." % (user_file_ext_input))
+
 
 
 # copy the files from their current location into a new folder (see Scratch file for thoughts on where new folder should be)
