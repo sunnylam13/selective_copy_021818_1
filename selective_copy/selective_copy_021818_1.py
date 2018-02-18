@@ -68,11 +68,20 @@ def scanfile(filename):
 	# this function scans a file to see if it matches the file type/ending specified by the user
 	pass
 
-def find_abs_src_path():
-	pass
+def find_abs_src_path(path,filename):
+	# SOURCE FILE
+	# get the directory path leading to the file name for later source copying
+	# we need to do this rather than using `user_folder_input` otherwise we'll miss subfolders and get errors
+	# use `os.path.join()` to create correct path rather than string concatenation
+	# use os.path.abspath() to make sure it's an absolute path
+	
+	# src_file_path_name = os.path.abspath(os.path.join(user_folder_input,filename))
+	src_file_path_name = os.path.abspath(os.path.join(path,filename))
 
-def find_abs_dst_path():
-	pass
+def find_abs_dst_path(path,filename):
+	# dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
+	dst_file_path_name = os.path.join(path,filename + "_" + "copy")
+
 
 for foldername,subfolders,filenames in os.walk(user_folder_input):
 	for filename in filenames:
@@ -88,7 +97,7 @@ for foldername,subfolders,filenames in os.walk(user_folder_input):
 				
 				src_file_path_name = os.path.abspath(os.path.join(user_folder_input,filename))
 
-				# # DESTINATION FILE
+				# DESTINATION FILE
 				dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
 				
 				# COPY PROCESS
