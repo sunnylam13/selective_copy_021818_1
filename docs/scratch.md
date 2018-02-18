@@ -19,3 +19,10 @@ In this case each filename has a unique source location path string and a destin
 ## Sunday, February 18, 2018 4:32 PM
 
 What we need is to get the current working directory and then add the subfolder name to the absolute path of the cwd as we go deeper and deeper into a folder... in order to get the right path.
+
+## Sunday, February 18, 2018 5:14 PM
+
+KEY POINT:  Apparently if you use os.path.join() with only a folder and filename in the os.walk() loops, you don't need to find the file paths yourself.  
+
+The system will construct everything for you.
+

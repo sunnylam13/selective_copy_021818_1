@@ -50,6 +50,10 @@ file_type_regex1 = re.compile(user_file_ext_input + "$")
 # get the absolute file path of the current working directory of program
 abs_cwd_file_path = os.path.abspath('.') # set the destination file path to be the current working directory or cwd
 
+# a list of all folders and subfolders to be analyzed
+folder_path_list = [] # a list to hold all finalized folder paths (not folder names)
+
+
 # create the search_result folder to store the copied files
 
 if (os.path.join(abs_cwd_file_path,"search_results")): # if the search_results folder already exists
@@ -87,7 +91,9 @@ def copy_file_sh(filename,src,dst):
 
 	shutil.copyfile(src, dst)
 
-def scanfolder(foldername_path,dirPath):
+
+
+def scanfolder(foldername_path):
 	# this function scans the parent folder and subfolders
 	# it then adds them to a list so that its files can be scanned individually
 
@@ -97,12 +103,14 @@ def scanfolder(foldername_path,dirPath):
 	# abs_cwd_file_path for foldername_path?
 
 	dirs = os.listdir(foldername_path) # list all files of any kind (i.e. all file and folder names)
-	absPath = dirPath
+	# absPath = dirPath
+	absPath = os.path.dirname(foldername_path) # returns the directory path except basename to the foldername_path
 
-	folder_path_list = [] # a list to hold all finalized folder paths (not folder names)
+	# folder_path_list = [] # a list to hold all finalized folder paths (not folder names)
 
 	for file in dirs:
-		new_path = os.path.join(absPath,file) # creates a path to the file/folder
+		# new_path = os.path.join(absPath,file) # creates a path to the file/folder
+		new_path = os.path.join(foldername_path,file) # creates a path to the file/folder
 
 		if os.path.isdir(new_path): #if the file is a folder
 			folder_path_list.append(new_path) # add it to the list of folders with its full path name
@@ -139,8 +147,39 @@ def scanfile(foldername_path, filename, search_result_path):
 
 
 
+def scan_folder(foldername):
+	for item in foldername:
+		if file_type_regex1.search(item): # if the item/filename/foldername in question matches the regex target
+			try:
+				# SOURCE FILE
+				src = find_abs_src_path(foldername,item)
+
+				# DESTINATION FILE
+				dst = find_abs_dst_path(search_result_path,item)
+				
+				# COPY FILE
+				copy_file_sh(item,src, dst)
+
+			except Exception as e:
+				print("There was an error and file was skipped.")
+				continue
+			else:
+				continue
 
 
+def analyze_extensions():
+	for foldername,subfolders,filenames in os.walk(foldername_path):
+
+		# analyze each folder
+
+		for item in foldername:
+			# where item is a folder
+			scan_folder(item)
+
+		# analyze each subfolder
+		
+		for item in subfolders:
+			scan_folder(item)
 
 
 # for foldername,subfolders,filenames in os.walk(user_folder_input):
@@ -186,6 +225,8 @@ def scanfile(foldername_path, filename, search_result_path):
 #####################################
 
 # run an initial scan of the upper level main folder tree
+
+# scanfolder(user_folder_input,abs_cwd_file_path)
 
 # then scan all the sub folders
 
