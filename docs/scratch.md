@@ -26,3 +26,5 @@ KEY POINT:  Apparently if you use os.path.join() with only a folder and filename
 
 The system will construct everything for you.
 
+Since we're only copying files, and not altering file names or listing file contents by their full path, getting the full directory path to a file or folder may not be necessary...
+

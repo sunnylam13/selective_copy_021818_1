@@ -147,9 +147,9 @@ def scanfile(foldername_path, filename, search_result_path):
 
 
 
-def scan_folder(foldername):
+def scan_folder(foldername,regex):
 	for item in foldername:
-		if file_type_regex1.search(item): # if the item/filename/foldername in question matches the regex target
+		if regex.search(item): # if the item/filename/foldername in question matches the regex target
 			try:
 				# SOURCE FILE
 				src = find_abs_src_path(foldername,item)
@@ -167,19 +167,19 @@ def scan_folder(foldername):
 				continue
 
 
-def analyze_extensions():
+def analyze_extensions(foldername_path,regex):
 	for foldername,subfolders,filenames in os.walk(foldername_path):
 
 		# analyze each folder
 
 		for item in foldername:
 			# where item is a folder
-			scan_folder(item)
+			scan_folder(item,regex)
 
 		# analyze each subfolder
 		
 		for item in subfolders:
-			scan_folder(item)
+			scan_folder(item,regex)
 
 
 # for foldername,subfolders,filenames in os.walk(user_folder_input):
@@ -227,6 +227,8 @@ def analyze_extensions():
 # run an initial scan of the upper level main folder tree
 
 # scanfolder(user_folder_input,abs_cwd_file_path)
+
+analyze_extensions(user_folder_input,user_file_ext_input)
 
 # then scan all the sub folders
 
