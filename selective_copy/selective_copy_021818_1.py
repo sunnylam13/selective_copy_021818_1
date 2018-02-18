@@ -207,6 +207,7 @@ def analyzeAllFiles ():
 	# find subfolders
 	# find matching files
 	scanFolder(user_folder_input)
+	scanFile(user_folder_input,file_type_regex1)
 
 	# then scan all the sub folders by cycling through folder_path_list until no more subfolders are added
 	# this should keep going until no more subfolders are analyzed
