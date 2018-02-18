@@ -15,3 +15,7 @@ In the case of using any destination directory we should print the name of the d
 It may be better to do as I've done in the past and create the filename path strings and push to a list or a dict before doing the copy process.
 
 In this case each filename has a unique source location path string and a destination location path string so a dict may be more useful to use instead.
+
+## Sunday, February 18, 2018 4:32 PM
+
+What we need is to get the current working directory and then add the subfolder name to the absolute path of the cwd as we go deeper and deeper into a folder... in order to get the right path.

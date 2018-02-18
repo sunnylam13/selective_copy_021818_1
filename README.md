@@ -26,3 +26,5 @@ http://stackabuse.com/how-to-copy-a-file-in-python/
 
 https://stackoverflow.com/questions/17057544/python-extract-folder-path-from-file-path
 
+https://www.tutorialspoint.com/python/os_listdir.htm
+

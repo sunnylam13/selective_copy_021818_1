@@ -60,14 +60,6 @@ else: # otherwise create the folder and then set search_result_path
 	search_result_path = (os.path.join(abs_cwd_file_path,"search_results")) # os.path.join() will handle the `/` or `\` depending on OS
 	# simply set the path to the search_results folder...
 
-def scanfolder(foldername):
-	# this function scans the parent folder and subfolders
-	# it then adds them to a list so that its files can be scanned individually
-
-def scanfile(filename):
-	# this function scans a file to see if it matches the file type/ending specified by the user
-	pass
-
 def find_abs_src_path(path,filename):
 	# SOURCE FILE
 	# get the directory path leading to the file name for later source copying
@@ -78,42 +70,90 @@ def find_abs_src_path(path,filename):
 	# src_file_path_name = os.path.abspath(os.path.join(user_folder_input,filename))
 	src_file_path_name = os.path.abspath(os.path.join(path,filename))
 
+	return src_file_path_name
+
 def find_abs_dst_path(path,filename):
 	# dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
 	dst_file_path_name = os.path.join(path,filename + "_" + "copy")
 
+	return dst_file_path_name
 
-for foldername,subfolders,filenames in os.walk(user_folder_input):
-	for filename in filenames:
+def copy_file_sh(filename,src,dst):
+	# COPY PROCESS
+	# copy the files from their current location into a new folder (see Scratch file for thoughts on where new folder should be)
+
+	# print("Found a file with the %s ending." % (user_file_ext_input))
+	print("Copying file: %s" % (filename))
+
+	shutil.copyfile(src, dst)
+
+def scanfolder(foldername_path):
+	# this function scans the parent folder and subfolders
+	# it then adds them to a list so that its files can be scanned individually
+
+	# argument `foldername_path` should actually be a string path to folder
+
+	dirs = os.listdir(foldername_path) # list all files
+
+def scanfile(filename):
+	# this function scans a file to see if it matches the file type/ending specified by the user
+	
+	for foldername,subfolders,filenames in os.walk(user_folder_input):
+		for filename in filenames:
+			if file_type_regex1.search(filename):
+				try:
+					# SOURCE FILE
+					src = find_abs_src_path(user_folder_input,filename)
+
+					# DESTINATION FILE
+					dst = find_abs_dst_path(search_result_path,filename)
+					
+					# COPY FILE
+					copy_file_sh(filename,src, dst)
+
+				except Exception as e:
+					print("There was an error and file was skipped.")
+					continue
+				else:
+					continue
+
+
+
+
+
+
+
+# for foldername,subfolders,filenames in os.walk(user_folder_input):
+# 	for filename in filenames:
 		
-		if file_type_regex1.search(filename):
-			try:
+# 		if file_type_regex1.search(filename):
+# 			try:
 				
-				# SOURCE FILE
-				# get the directory path leading to the file name for later source copying
-				# we need to do this rather than using `user_folder_input` otherwise we'll miss subfolders and get errors
-				# use `os.path.join()` to create correct path rather than string concatenation
-				# use os.path.abspath() to make sure it's an absolute path
+# 				# SOURCE FILE
+# 				# get the directory path leading to the file name for later source copying
+# 				# we need to do this rather than using `user_folder_input` otherwise we'll miss subfolders and get errors
+# 				# use `os.path.join()` to create correct path rather than string concatenation
+# 				# use os.path.abspath() to make sure it's an absolute path
 				
-				src_file_path_name = os.path.abspath(os.path.join(user_folder_input,filename))
+# 				src_file_path_name = os.path.abspath(os.path.join(user_folder_input,filename))
 
-				# DESTINATION FILE
-				dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
+# 				# DESTINATION FILE
+# 				dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
 				
-				# COPY PROCESS
-				# copy the files from their current location into a new folder (see Scratch file for thoughts on where new folder should be)
+# 				# COPY PROCESS
+# 				# copy the files from their current location into a new folder (see Scratch file for thoughts on where new folder should be)
 
-				# print("Found a file with the %s ending." % (user_file_ext_input))
-				print("Copying file: %s" % (filename))
+# 				# print("Found a file with the %s ending." % (user_file_ext_input))
+# 				print("Copying file: %s" % (filename))
 
-				shutil.copyfile(src_file_path_name, dst_file_path_name)
+# 				shutil.copyfile(src_file_path_name, dst_file_path_name)
 
-			except Exception as e:
-				# raise
-				print("There was an error and file was skipped.")
-				continue
-			else:
-				continue
+# 			except Exception as e:
+# 				# raise
+# 				print("There was an error and file was skipped.")
+# 				continue
+# 			else:
+# 				continue
 
 #####################################
 # END FILE ANALYSIS
@@ -125,7 +165,9 @@ for foldername,subfolders,filenames in os.walk(user_folder_input):
 # EXECUTION BLOCK
 #####################################
 
+# run an initial scan of the upper level main folder tree
 
+# then scan all the sub folders
 
 #####################################
 # END EXECUTION BLOCK
