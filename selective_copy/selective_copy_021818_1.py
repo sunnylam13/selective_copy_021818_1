@@ -52,7 +52,7 @@ for foldername,subfolders,filenames in os.walk(user_folder_input):
 		# print(filename) # for testing
 		if file_type_regex1.search(filename):
 			# print("Found a file with the %s ending." % (user_file_ext_input))
-			print("Copying file:  " % (filename))
+			print("Copying file: %s" % (filename))
 			# use `os.path.join()` to create correct path rather than string concatenation
 			src_file_path_name = os.path.abspath(os.path.join(user_folder_input,filename))
 			dst_file_path_name = os.path.join(search_result_path,filename)
