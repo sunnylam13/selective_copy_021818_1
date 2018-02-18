@@ -12,3 +12,7 @@ The file path to use is:
 
 	docs/testFolder
 
+The file extension to test with is:
+
+	.txt
+
