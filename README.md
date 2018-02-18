@@ -18,3 +18,7 @@ The file extension to test with is:
 
 	.txt
 
+## References
+
+https://stackoverflow.com/questions/123198/how-do-i-copy-a-file-in-python
+

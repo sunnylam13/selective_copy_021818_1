@@ -11,7 +11,7 @@ config = {
 	'author_email': 'sunny.lam@gmail.com',
 	'version': '0.1',
 	'install_requires': ['nose'],
-	'packages': ['os,re'],
+	'packages': ['os,re,shutil'],
 	'scripts': [],
 	'name': 'Selective File Copy'
 }
