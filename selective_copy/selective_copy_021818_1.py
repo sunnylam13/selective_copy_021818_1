@@ -54,8 +54,6 @@ else: # otherwise create the folder and then set search_result_path
 	search_result_path = (os.path.join(abs_cwd_file_path,"search_results")) # os.path.join() will handle the `/` or `\` depending on OS
 	# simply set the path to the search_results folder...
 
-# search_result_path = os.mkdir(os.path.join(abs_cwd_file_path,"search_results")) # os.path.join() will handle the `/` or `\` depending on OS
-
 for foldername,subfolders,filenames in os.walk(user_folder_input):
 	for filename in filenames:
 		
@@ -80,7 +78,7 @@ for foldername,subfolders,filenames in os.walk(user_folder_input):
 				# copy the files from their current location into a new folder (see Scratch file for thoughts on where new folder should be)
 
 				shutil.copyfile(src_file_path_name, dst_file_path_name)
-				
+
 			except Exception as e:
 				# raise
 				print("There was an error and file was skipped.")
