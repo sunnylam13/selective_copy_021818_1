@@ -29,3 +29,8 @@ The system will construct everything for you.
 Since we're only copying files, and not altering file names or listing file contents by their full path, getting the full directory path to a file or folder may not be necessary...
 
 Never mind, you definitely need them.
+
+## Sunday, February 18, 2018 6:14 PM
+
+> file_type_regex1 = re.compile(user_file_ext_input) # using this one will find files like `testFile.txt.doc` which is wrong
+

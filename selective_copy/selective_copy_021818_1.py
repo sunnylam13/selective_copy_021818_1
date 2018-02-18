@@ -31,9 +31,8 @@ user_file_ext_input = input("Please provide the file extension of the files you 
 # create a regex statement to match `user_file_ext_input`
 # https://regexr.com/3kvi4
 # re.compile should turn a raw string into current regex language so you can skip creating the formula sort of...
-# file_type_regex1 = re.compile(user_file_ext_input) # using this one will find files like `testFile.txt.doc` which is wrong
+
 file_type_regex1 = re.compile(user_file_ext_input + "$")
-# file_type_regex1 = re.compile("(" + user_file_ext_input + "$" + ")")
 # print(file_type_regex1) # for testing
 # print(file_type_regex1.search("testTextA1.txt")) # for testing
 
@@ -80,12 +79,6 @@ def find_abs_src_path(path,filename):
 
 	return src_file_path_name
 
-# def find_abs_dst_path(path,filename):
-# 	# dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
-# 	dst_file_path_name = os.path.join(path,filename + "_" + "copy")
-
-# 	return dst_file_path_name
-
 def find_abs_dst_path(path,filename,regex):
 	# dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
 	dst_file_path_name = os.path.join(path,file_type_regex1.sub("_copy" + user_file_ext_input,filename)) # use regex substitution to change the file name so that shutil.copyfile() will work as it won't work if the names are identical for some reason?
@@ -100,73 +93,6 @@ def copy_file_sh(filename,src,dst):
 	print("Copying file: %s" % (filename))
 
 	shutil.copyfile(src, dst)
-
-
-
-# def scanfile(foldername_path, filename, search_result_path):
-# 	# this function scans a file to see if it matches the file type/ending specified by the user
-# 	# os.walk(user_folder_input)?
-# 	# os.walk(folder_path_to_be_analyzed)
-	
-# 	# `foldername_path` - the path to the folder to be analyzed
-# 	# `search_result_path` - where you want your search results to go
-# 	# `filename` - the name of the file in question, not necessarily a path
-	
-# 	for foldername,subfolders,filenames in os.walk(foldername_path):
-# 		for filename in filenames:
-# 			if file_type_regex1.search(filename):
-# 				try:
-# 					# SOURCE FILE
-# 					src = find_abs_src_path(foldername_path,filename)
-
-# 					# DESTINATION FILE
-# 					dst = find_abs_dst_path(search_result_path,filename)
-					
-# 					# COPY FILE
-# 					copy_file_sh(filename,src, dst)
-
-# 				except Exception as e:
-# 					print("There was an error and file was skipped.")
-# 					continue
-# 				else:
-# 					continue
-
-
-# def scan_folder(foldername,regex):
-# 	for item in foldername:
-# 		if regex.search(item): # if the item/filename/foldername in question matches the regex target
-# 			try:
-# 				# SOURCE FILE
-# 				src = find_abs_src_path(foldername,item)
-
-# 				# DESTINATION FILE
-# 				dst = find_abs_dst_path(search_result_path,item)
-				
-# 				# COPY FILE
-# 				copy_file_sh(item,src, dst)
-
-# 			except Exception as e:
-# 				print("There was an error and file was skipped.")
-# 				continue
-# 			else:
-# 				continue
-
-
-# def analyze_extensions(foldername_path,regex):
-# 	for foldername,subfolders,filenames in os.walk(foldername_path):
-
-# 		# analyze each folder
-
-# 		for item in foldername:
-# 			# where item is a folder
-# 			scan_folder(item,regex)
-# 			print(item)
-
-# 		# analyze each subfolder
-		
-# 		for item in subfolders:
-# 			scan_folder(item,regex)
-
 
 
 def scanFolder(foldername_path):
@@ -218,13 +144,13 @@ def analyzeAllFiles ():
 
 	# then scan all the sub folders by cycling through folder_path_list until no more subfolders are added
 	# this should keep going until no more subfolders are analyzed
+	# then scan all the files by cycling through folder_path_list until no more subfolders are added/left
 	for subfolder in folder_path_list:
 		scanFolder(subfolder)
-		# then scan all the files by cycling through folder_path_list until no more subfolders are added/left
 		scanFile(subfolder,file_type_regex1)
 
-	print(folder_path_list)
-	print(file_path_list)
+	# print(folder_path_list)
+	# print(file_path_list)
 
 	# then go through the file list that meets criteria and copy
 	for match_file in file_path_list:
@@ -245,6 +171,8 @@ def analyzeAllFiles ():
 #####################################
 
 analyzeAllFiles()
+
+print("The destination folder is:  %s" % (search_result_path))
 
 #####################################
 # END EXECUTION BLOCK
