@@ -33,6 +33,7 @@ user_file_ext_input = input("Please provide the file extension of the files you 
 # re.compile should turn a raw string into current regex language so you can skip creating the formula sort of...
 # file_type_regex1 = re.compile(user_file_ext_input) # using this one will find files like `testFile.txt.doc` which is wrong
 file_type_regex1 = re.compile(user_file_ext_input + "$")
+# file_type_regex1 = re.compile("(" + user_file_ext_input + "$" + ")")
 # print(file_type_regex1) # for testing
 # print(file_type_regex1.search("testTextA1.txt")) # for testing
 
@@ -79,9 +80,15 @@ def find_abs_src_path(path,filename):
 
 	return src_file_path_name
 
-def find_abs_dst_path(path,filename):
+# def find_abs_dst_path(path,filename):
+# 	# dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
+# 	dst_file_path_name = os.path.join(path,filename + "_" + "copy")
+
+# 	return dst_file_path_name
+
+def find_abs_dst_path(path,filename,regex):
 	# dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
-	dst_file_path_name = os.path.join(path,filename + "_" + "copy")
+	dst_file_path_name = os.path.join(path,file_type_regex1.sub("_copy" + user_file_ext_input,filename)) # use regex substitution to change the file name so that shutil.copyfile() will work as it won't work if the names are identical for some reason?
 
 	return dst_file_path_name
 
@@ -224,7 +231,7 @@ def analyzeAllFiles ():
 		# match_file - already a string file path if done right, aka file source
 		get_fileBaseName = os.path.basename(match_file) # this should be the name of the file only with the rest of the path to the left stripped away
 		src_file = match_file
-		dst_file = find_abs_dst_path(search_result_path,get_fileBaseName)
+		dst_file = find_abs_dst_path(search_result_path,get_fileBaseName,file_type_regex1)
 		copy_file_sh(get_fileBaseName,src_file,dst_file)
 
 #####################################
