@@ -66,35 +66,41 @@ for foldername,subfolders,filenames in os.walk(user_folder_input):
 		# n = 1
 		
 		if file_type_regex1.search(filename):
-			# print("Found a file with the %s ending." % (user_file_ext_input))
-			# print("Copying file: %s" % (filename))
+			try:
+				# print("Found a file with the %s ending." % (user_file_ext_input))
+				print("Copying file: %s" % (filename))
 
-			
-			# SOURCE FILE
-			# get the directory path leading to the file name for later source copying
-			# we need to do this rather than using `user_folder_input` otherwise we'll miss subfolders and get errors
-			# use `os.path.join()` to create correct path rather than string concatenation
-			# use os.path.abspath() to make sure it's an absolute path
+				
+				# SOURCE FILE
+				# get the directory path leading to the file name for later source copying
+				# we need to do this rather than using `user_folder_input` otherwise we'll miss subfolders and get errors
+				# use `os.path.join()` to create correct path rather than string concatenation
+				# use os.path.abspath() to make sure it's an absolute path
 
-			# src_part_path = os.path.dirname(filename)
-			# print(src_part_path) # for testing
-			
-			src_file_path_name = os.path.abspath(os.path.join(user_folder_input,filename))
-			# # src_file_path_name = os.path.abspath(os.path.join(filename_absPath,filename))
-			# src_file_path_name = os.path.abspath(os.path.join(src_part_path,filename))
-			
-			# print("The source file is %s" % (os.path.join(abs_cwd_file_path,filename)))
+				# src_part_path = os.path.dirname(filename)
+				# print(src_part_path) # for testing
+				
+				src_file_path_name = os.path.abspath(os.path.join(user_folder_input,filename))
+				# # src_file_path_name = os.path.abspath(os.path.join(filename_absPath,filename))
+				# src_file_path_name = os.path.abspath(os.path.join(src_part_path,filename))
+				
+				# print("The source file is %s" % (os.path.join(abs_cwd_file_path,filename)))
 
-			# # DESTINATION FILE
-			# # dst_file_path_name = os.path.join(search_result_path,filename + "_" + str(n))
-			dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
-			
-			# # COPY PROCESS
-			# # copy the files from their current location into a new folder (see Scratch file for thoughts on where new folder should be)
-			# # using `copyfile(src, dst)`
-			# # copyfile(src_file_path_name, dst_file_path_name)
-			# # shutil.copyfile(src_file_path_name, search_result_path)
-			# shutil.copyfile(src_file_path_name, dst_file_path_name)
-			# n += 1
-			
+				# # DESTINATION FILE
+				# # dst_file_path_name = os.path.join(search_result_path,filename + "_" + str(n))
+				dst_file_path_name = os.path.join(search_result_path,filename + "_" + "copy")
+				
+				# # COPY PROCESS
+				# # copy the files from their current location into a new folder (see Scratch file for thoughts on where new folder should be)
+				# # using `copyfile(src, dst)`
+				# # copyfile(src_file_path_name, dst_file_path_name)
+				# # shutil.copyfile(src_file_path_name, search_result_path)
+				shutil.copyfile(src_file_path_name, dst_file_path_name)
+				# n += 1
+			except Exception as e:
+				# raise
+				print("There was an error and file was skipped.")
+				continue
+			else:
+				continue
 
