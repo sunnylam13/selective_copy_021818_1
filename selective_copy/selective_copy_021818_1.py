@@ -95,17 +95,20 @@ def scanfolder(foldername_path):
 
 	dirs = os.listdir(foldername_path) # list all files
 
-def scanfile(foldername_path, filename):
+def scanfile(foldername_path, filename, search_result_path):
 	# this function scans a file to see if it matches the file type/ending specified by the user
 	# os.walk(user_folder_input)?
 	# os.walk(folder_path_to_be_analyzed)
+	# `foldername_path` - the path to the folder to be analyzed
+	# `search_result_path` - where you want your search results to go
+	# `filename` - the name of the file in question, not necessarily a path
 	
 	for foldername,subfolders,filenames in os.walk(foldername_path):
 		for filename in filenames:
 			if file_type_regex1.search(filename):
 				try:
 					# SOURCE FILE
-					src = find_abs_src_path(user_folder_input,filename)
+					src = find_abs_src_path(foldername_path,filename)
 
 					# DESTINATION FILE
 					dst = find_abs_dst_path(search_result_path,filename)
