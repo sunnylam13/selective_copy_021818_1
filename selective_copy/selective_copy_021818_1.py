@@ -216,8 +216,12 @@ def analyzeAllFiles ():
 		scanFile(subfolder,file_type_regex1)
 
 	# then go through the file list that meets criteria and copy
-	for match_files in file_path_list:
-		pass
+	for match_file in file_path_list:
+		# match_file - already a string file path if done right, aka file source
+		get_fileBaseName = os.path.basename(match_file) # this should be the name of the file only with the rest of the path to the left stripped away
+		src_file = match_file
+		dst_file = find_abs_dst_path(search_result_path,get_fileBaseName)
+		copy_file_sh(get_fileBaseName,src_file,dst_file)
 
 #####################################
 # END FILE ANALYSIS
