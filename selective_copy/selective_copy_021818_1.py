@@ -17,7 +17,7 @@ user_folder_input = input("Please provide the path to the folder you want to sea
 
 # get user inputted file extension (as a string)
 
-user_file_ext_input = input("Please provide the file extension of the files you want to copy (formats should be written as .pdf, .jpg, .doc, etc.):  ")
+user_file_ext_input = input("Please provide the file extension of the files you want to copy (formats should be written as pdf, jpg, doc, etc.  Don't use .jpg for example.):  ")
 
 #####################################
 # END USER INPUT
@@ -31,8 +31,8 @@ user_file_ext_input = input("Please provide the file extension of the files you 
 # create a regex statement to match `user_file_ext_input`
 # https://regexr.com/3kvi4
 # re.compile should turn a raw string into current regex language
-file_type = re.compile('r' + user_file_ext_input)
-print(file_type) # for testing
+file_type_regex1 = re.compile('r' + "\'." + user_file_ext_input + "\'")
+print(file_type_regex1) # for testing
 
 #####################################
 # END REGEX
