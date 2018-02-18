@@ -9,3 +9,9 @@ It would be possible in the future to write the program to output to a user spec
 Or we could make it default to the master level parent like `C:\\` or `/` or the user's main parent (`~/`).
 
 In the case of using any destination directory we should print the name of the directory it will be stored in at the end of the program.
+
+## Sunday, February 18, 2018 4:10 PM
+
+It may be better to do as I've done in the past and create the filename path strings and push to a list or a dict before doing the copy process.
+
+In this case each filename has a unique source location path string and a destination location path string so a dict may be more useful to use instead.

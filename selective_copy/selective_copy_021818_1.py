@@ -40,11 +40,17 @@ file_type_regex1 = re.compile(user_file_ext_input + "$")
 # END REGEX
 #####################################
 
+#####################################
+# FILE ANALYSIS
+#####################################
 
 # walk through the folder tree, search for files with user chosen file extension
 # os.walk() handles all the behind the scenes looping, including into the subfolders (without having to write a separate loop)
 
+# get the absolute file path of the current working directory of program
 abs_cwd_file_path = os.path.abspath('.') # set the destination file path to be the current working directory or cwd
+
+# create the search_result folder to store the copied files
 
 if (os.path.join(abs_cwd_file_path,"search_results")): # if the search_results folder already exists
 	search_result_path = (os.path.join(abs_cwd_file_path,"search_results")) # os.path.join() will handle the `/` or `\` depending on OS
@@ -54,14 +60,25 @@ else: # otherwise create the folder and then set search_result_path
 	search_result_path = (os.path.join(abs_cwd_file_path,"search_results")) # os.path.join() will handle the `/` or `\` depending on OS
 	# simply set the path to the search_results folder...
 
+def scanfolder(foldername):
+	# this function scans the parent folder and subfolders
+	# it then adds them to a list so that its files can be scanned individually
+
+def scanfile(filename):
+	# this function scans a file to see if it matches the file type/ending specified by the user
+	pass
+
+def find_src_path():
+	pass
+
+def find_dst_path():
+	pass
+
 for foldername,subfolders,filenames in os.walk(user_folder_input):
 	for filename in filenames:
 		
 		if file_type_regex1.search(filename):
 			try:
-				# print("Found a file with the %s ending." % (user_file_ext_input))
-				print("Copying file: %s" % (filename))
-
 				
 				# SOURCE FILE
 				# get the directory path leading to the file name for later source copying
@@ -77,6 +94,9 @@ for foldername,subfolders,filenames in os.walk(user_folder_input):
 				# COPY PROCESS
 				# copy the files from their current location into a new folder (see Scratch file for thoughts on where new folder should be)
 
+				# print("Found a file with the %s ending." % (user_file_ext_input))
+				print("Copying file: %s" % (filename))
+
 				shutil.copyfile(src_file_path_name, dst_file_path_name)
 
 			except Exception as e:
@@ -85,4 +105,20 @@ for foldername,subfolders,filenames in os.walk(user_folder_input):
 				continue
 			else:
 				continue
+
+#####################################
+# END FILE ANALYSIS
+#####################################
+
+
+
+#####################################
+# EXECUTION BLOCK
+#####################################
+
+
+
+#####################################
+# END EXECUTION BLOCK
+#####################################
 
