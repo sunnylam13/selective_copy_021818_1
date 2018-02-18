@@ -228,7 +228,7 @@ def analyze_extensions(foldername_path,regex):
 
 # scanfolder(user_folder_input,abs_cwd_file_path)
 
-analyze_extensions(user_folder_input,user_file_ext_input)
+analyze_extensions(user_folder_input,file_type_regex1)
 
 # then scan all the sub folders
 
