@@ -96,69 +96,69 @@ def copy_file_sh(filename,src,dst):
 
 
 
-def scanfile(foldername_path, filename, search_result_path):
-	# this function scans a file to see if it matches the file type/ending specified by the user
-	# os.walk(user_folder_input)?
-	# os.walk(folder_path_to_be_analyzed)
+# def scanfile(foldername_path, filename, search_result_path):
+# 	# this function scans a file to see if it matches the file type/ending specified by the user
+# 	# os.walk(user_folder_input)?
+# 	# os.walk(folder_path_to_be_analyzed)
 	
-	# `foldername_path` - the path to the folder to be analyzed
-	# `search_result_path` - where you want your search results to go
-	# `filename` - the name of the file in question, not necessarily a path
+# 	# `foldername_path` - the path to the folder to be analyzed
+# 	# `search_result_path` - where you want your search results to go
+# 	# `filename` - the name of the file in question, not necessarily a path
 	
-	for foldername,subfolders,filenames in os.walk(foldername_path):
-		for filename in filenames:
-			if file_type_regex1.search(filename):
-				try:
-					# SOURCE FILE
-					src = find_abs_src_path(foldername_path,filename)
+# 	for foldername,subfolders,filenames in os.walk(foldername_path):
+# 		for filename in filenames:
+# 			if file_type_regex1.search(filename):
+# 				try:
+# 					# SOURCE FILE
+# 					src = find_abs_src_path(foldername_path,filename)
 
-					# DESTINATION FILE
-					dst = find_abs_dst_path(search_result_path,filename)
+# 					# DESTINATION FILE
+# 					dst = find_abs_dst_path(search_result_path,filename)
 					
-					# COPY FILE
-					copy_file_sh(filename,src, dst)
+# 					# COPY FILE
+# 					copy_file_sh(filename,src, dst)
 
-				except Exception as e:
-					print("There was an error and file was skipped.")
-					continue
-				else:
-					continue
+# 				except Exception as e:
+# 					print("There was an error and file was skipped.")
+# 					continue
+# 				else:
+# 					continue
 
 
-def scan_folder(foldername,regex):
-	for item in foldername:
-		if regex.search(item): # if the item/filename/foldername in question matches the regex target
-			try:
-				# SOURCE FILE
-				src = find_abs_src_path(foldername,item)
+# def scan_folder(foldername,regex):
+# 	for item in foldername:
+# 		if regex.search(item): # if the item/filename/foldername in question matches the regex target
+# 			try:
+# 				# SOURCE FILE
+# 				src = find_abs_src_path(foldername,item)
 
-				# DESTINATION FILE
-				dst = find_abs_dst_path(search_result_path,item)
+# 				# DESTINATION FILE
+# 				dst = find_abs_dst_path(search_result_path,item)
 				
-				# COPY FILE
-				copy_file_sh(item,src, dst)
+# 				# COPY FILE
+# 				copy_file_sh(item,src, dst)
 
-			except Exception as e:
-				print("There was an error and file was skipped.")
-				continue
-			else:
-				continue
+# 			except Exception as e:
+# 				print("There was an error and file was skipped.")
+# 				continue
+# 			else:
+# 				continue
 
 
-def analyze_extensions(foldername_path,regex):
-	for foldername,subfolders,filenames in os.walk(foldername_path):
+# def analyze_extensions(foldername_path,regex):
+# 	for foldername,subfolders,filenames in os.walk(foldername_path):
 
-		# analyze each folder
+# 		# analyze each folder
 
-		for item in foldername:
-			# where item is a folder
-			scan_folder(item,regex)
-			print(item)
+# 		for item in foldername:
+# 			# where item is a folder
+# 			scan_folder(item,regex)
+# 			print(item)
 
-		# analyze each subfolder
+# 		# analyze each subfolder
 		
-		for item in subfolders:
-			scan_folder(item,regex)
+# 		for item in subfolders:
+# 			scan_folder(item,regex)
 
 
 
@@ -233,14 +233,7 @@ def analyzeAllFiles ():
 # EXECUTION BLOCK
 #####################################
 
-# run an initial scan of the upper level main folder tree
-
-# scanfolder(user_folder_input,abs_cwd_file_path)
-
-# analyze_extensions(user_folder_input,file_type_regex1)
-
-# scanFolder(user_folder_input)
-# print(folder_path_list)
+analyzeAllFiles()
 
 #####################################
 # END EXECUTION BLOCK
