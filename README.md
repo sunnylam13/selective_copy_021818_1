@@ -22,3 +22,7 @@ The file extension to test with is:
 
 https://stackoverflow.com/questions/123198/how-do-i-copy-a-file-in-python
 
+http://stackabuse.com/how-to-copy-a-file-in-python/
+
+https://stackoverflow.com/questions/17057544/python-extract-folder-path-from-file-path
+
