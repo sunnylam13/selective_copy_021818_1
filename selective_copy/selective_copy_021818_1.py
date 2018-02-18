@@ -68,10 +68,10 @@ def scanfile(filename):
 	# this function scans a file to see if it matches the file type/ending specified by the user
 	pass
 
-def find_src_path():
+def find_abs_src_path():
 	pass
 
-def find_dst_path():
+def find_abs_dst_path():
 	pass
 
 for foldername,subfolders,filenames in os.walk(user_folder_input):
