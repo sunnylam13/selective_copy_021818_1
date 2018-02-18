@@ -10,7 +10,9 @@ The test data is found in:
 
 The file path to use is:
 
-	docs/testFolder
+	../docs/testFolder
+
+the use of "." means within execution file's cwd...  ".." means one level above it in the project directory...
 
 The file extension to test with is:
 

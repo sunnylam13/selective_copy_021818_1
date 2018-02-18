@@ -3,7 +3,7 @@
 # ! /usr/local/Cellar/python3/3.6.1
 
 # USAGE
-# ???
+# python3 selective_copy_021818_1.py
 
 import os, re
 
@@ -17,7 +17,7 @@ user_folder_input = input("Please provide the path to the folder you want to sea
 
 # get user inputted file extension (as a string)
 
-user_file_ext_input = input("Please provide the file extension of the files you want to copy (formats should be written as pdf, jpg, doc, etc.  Don't use .jpg for example.):  ")
+user_file_ext_input = input("Please provide the file extension of the files you want to copy (formats should be written as .pdf, .jpg, .doc, etc.):  ")
 
 #####################################
 # END USER INPUT
@@ -30,9 +30,11 @@ user_file_ext_input = input("Please provide the file extension of the files you 
 
 # create a regex statement to match `user_file_ext_input`
 # https://regexr.com/3kvi4
-# re.compile should turn a raw string into current regex language
-file_type_regex1 = re.compile('r' + "\'." + user_file_ext_input + "\'")
-print(file_type_regex1) # for testing
+# re.compile should turn a raw string into current regex language so you can skip creating the formula sort of...
+# file_type_regex1 = re.compile(user_file_ext_input) # using this one will find files like `testFile.txt.doc` which is wrong
+file_type_regex1 = re.compile(user_file_ext_input + "$")
+# print(file_type_regex1) # for testing
+# print(file_type_regex1.search("testTextA1.txt")) # for testing
 
 #####################################
 # END REGEX
@@ -44,9 +46,9 @@ print(file_type_regex1) # for testing
 
 for foldername,subfolders,filenames in os.walk(user_folder_input):
 	for filename in filenames:
+		print(filename) # for testing
 		if file_type_regex1.search(filename):
 			print("Found a file with the %s ending." % (user_file_ext_input))
-
 
 
 # copy the files from their current location into a new folder (see Scratch file for thoughts on where new folder should be)
